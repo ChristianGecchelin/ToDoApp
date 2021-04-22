@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useState } from "react";
+import Header from "./Components/Header/";
+import List from "./Components/List/";
+import Create from "./Components/Create";
+import { Container } from "react-bootstrap";
 function App() {
+  const [activities, setActivities] = useState([]); //hook para controlar el estado
+  const addActivity = (activity) => {
+    //funcion que agrega una tarea
+    setActivities([...activities, activity]);
+  };
+  const deleteActivity = (id) => {
+    const newActivities = activities.filter((activity) => activity.id !== id);
+    setActivities(newActivities);
+  };
+  const checkStatus = (state) => {
+    state === false ? (state = true) : (state = false);
+    console.log(state);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container fluid>
+      <Header />
+      <Create addActivity={addActivity} />{" "}
+      {/*le mando las props que luego usa Create, props bajan*/}
+      <List
+        activities={activities}
+        /*le paso lo que grabe en mi estado*/
+        deleteActivity={deleteActivity}
+        checkStatus={checkStatus}
+      />
+    </Container>
   );
 }
 

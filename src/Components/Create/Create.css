@@ -1,0 +1,10 @@
+.width-button {
+  width: 100%;
+  height: 3rem;
+}
+.width-input {
+  width: 100%;
+  height: 3rem;
+  border: 3px red solid;
+  text-align: center;
+}
